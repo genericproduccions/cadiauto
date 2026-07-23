@@ -20,6 +20,8 @@ jobs:
           script_stop: true
           script: |
             set -e
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/id_ed25519
             cd ~/private/clients
             git fetch origin main
             git reset --hard origin/main

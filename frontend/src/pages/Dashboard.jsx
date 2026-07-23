@@ -49,7 +49,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-10">
       <div>
-        <div className="text-xs font-semibold uppercase tracking-wide text-primary">Panell d'administració</div>
+        <div className="text-xs font-semibold uppercase tracking-wide text-primary">Panell d'administracióooo</div>
         <h1 className="mt-2 text-3xl font-bold text-foreground">{getGreeting()}</h1>
         <p className="mt-2 text-muted-foreground">Resum de l'activitat i accessos ràpids.</p>
       </div>

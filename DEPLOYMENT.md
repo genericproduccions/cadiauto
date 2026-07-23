@@ -85,9 +85,15 @@ donar-la d'alta a GitHub com a deploy key), la pots reutilitzar per a totes dues
 de nova — només cal afegir la seva pública als `authorized_keys` del mateix servidor:
 
 ```bash
-# Al servidor:
-cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
+# Al servidor — afegeix la clau només si no hi és ja i garantint un salt de línia
+# (fer servir `>>` directament pot ajuntar la clau nova amb l'última línia existent
+# si el fitxer no acaba en salt de línia, corrompent totes dues entrades):
+KEY="$(cat ~/.ssh/id_ed25519.pub)"
+touch ~/.ssh/authorized_keys
+grep -qxF "$KEY" ~/.ssh/authorized_keys || printf '\n%s\n' "$KEY" >> ~/.ssh/authorized_keys
+sed -i '/^$/d' ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
+cat ~/.ssh/authorized_keys   # comprova que cada clau ocupa la seva pròpia línia
 
 # Mostra la clau privada per copiar-la al secret de GitHub (apartat 2.2):
 cat ~/.ssh/id_ed25519
